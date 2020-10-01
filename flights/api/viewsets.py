@@ -25,7 +25,7 @@ class FlightViewSet(ModelViewSet):
         return Response(all_airports, 200)
 
     @action(methods=['post'], detail=False)
-    def seed(self, request):
+    def seeds(self, request):
         all_airports = Airport.objects.all().values_list('iata', flat=True)
 
         # Verifica as combinações de aeroportos que estão no banco de dados

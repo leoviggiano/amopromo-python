@@ -17,7 +17,7 @@ class AirportViewSet(ModelViewSet):
     serializer_class = AirportSerializer
 
     @action(methods=['post'], detail=False)
-    def seed(self, request):
+    def seeds(self, request):
         response = requests.get(f"{BASE_URL}/airports/{API_KEY}", auth=(API_USER, API_PASS))
 
         if response.status_code == 401:
