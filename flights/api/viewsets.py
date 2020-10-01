@@ -20,7 +20,7 @@ class FlightViewSet(ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def duration(self, request):
-        fields = ['flight_duration', 'aircraft_manufacturer', 'aircraft_model', 'departure_iata', 'arrival_iata']
+        fields = ['distance', 'flight_duration', 'aircraft_manufacturer', 'aircraft_model', 'departure_iata', 'arrival_iata']
         all_airports = Flights.objects.all().values(*fields).order_by('-flight_duration')[:30]
         return Response(all_airports, 200)
 
