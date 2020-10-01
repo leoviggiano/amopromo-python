@@ -24,7 +24,7 @@ class FlightViewSet(ModelViewSet):
         all_airports = Flights.objects.all().values(*fields).order_by('-flight_duration')[:30]
         return Response(all_airports, 200)
 
-    @action(methods=['get'], detail=False)
+    @action(methods=['post'], detail=False)
     def seed(self, request):
         all_airports = Airport.objects.all().values_list('iata', flat=True)
 

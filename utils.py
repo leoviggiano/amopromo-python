@@ -2,6 +2,7 @@ from math import radians, cos, sin, asin, sqrt
 from constants import LIMIT_DATA
 from flights.models import Flights
 
+
 def get_all_airports_combinations(airports: [dict]) -> [dict]:
     all_combinations = {}
     """
@@ -29,7 +30,7 @@ def find_missing_flights(airports: [str], combination_airports: {str: [dict]}) -
     return missing_flights
 
 
-def haversine(lon1, lat1, lon2, lat2):
+def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
     """
     Calculate the great circle distance between two points
     on the earth (specified in decimal degrees)

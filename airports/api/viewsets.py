@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -7,6 +8,8 @@ from airports.models import Airport
 from constants import API_KEY, API_PASS, API_USER, BASE_URL
 
 import requests
+
+from flights.models import Flights
 
 
 class AirportViewSet(ModelViewSet):
@@ -32,6 +35,24 @@ class AirportViewSet(ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def count(self, request):
-        queryset = Airport.objects.all()
-        return Response({ "ok": "true" })
-        pass
+        airports = Airport.objects.values('city').annotate(airports=Count('city')).order_by('-airports')[:1]
+        return Response(airports, 200)
+
+    @action(methods=['get'], detail=False)
+    def distance(self, request):
+        airports = Airport.objects.all().values_list('iata')
+        return_arr = []
+        for iata, in airports:
+            highest = Flights.find_flight_distance_order(iata, '-')
+            lowest = Flights.find_flight_distance_order(iata)
+
+            highest_iata = len(highest) > 0 and highest[0]['arrival_iata'] or 'Não há vôo disponível'
+            lowest_iata = len(lowest) > 0 and lowest[0]['arrival_iata'] or 'Não há vôo disponível'
+
+            return_arr.append({
+                "from": iata,
+                "highest_duration": highest_iata,
+                "lowest_duration": lowest_iata,
+            })
+
+        return Response(return_arr, 200)

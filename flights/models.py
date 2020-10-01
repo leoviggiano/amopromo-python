@@ -17,3 +17,7 @@ class Flights(models.Model):
     @classmethod
     def find_flight(cls, arrival_iata, departure_iata):
         return cls.objects.filter(arrival_iata=arrival_iata, departure_iata=departure_iata)
+
+    @classmethod
+    def find_flight_distance_order(cls, iata, order=""):
+        return cls.objects.filter(departure_iata=iata).order_by(f'{order}distance').values('arrival_iata')[:1]
