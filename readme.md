@@ -2,7 +2,9 @@
 ```sh
     $ git clone
     $ cd to folder
-    $ virtualenv venv python=3.8  #Depende da versão do python
+    $ virtualenv venv --python=3.8  #Depende da versão do python
+    $ source venv/bin/activate
+    $ pip install -r requirements.txt
     $ docker-compose up -d
     $ python manage.py migrate
     $ python manage.py runserver
