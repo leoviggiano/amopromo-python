@@ -19,9 +19,19 @@ class FlightViewSet(ModelViewSet):
     serializer_class = FlightSerializer
 
     @action(methods=['get'], detail=False)
+    def duration(self, request):
+        fields = ['flight_duration', 'aircraft_manufacturer', 'aircraft_model', 'departure_iata', 'arrival_iata']
+        all_airports = Flights.objects.all().values(*fields).order_by('-flight_duration')[:30]
+        return Response(all_airports, 200)
+
+    @action(methods=['get'], detail=False)
     def seed(self, request):
         all_airports = Airport.objects.all().values_list('iata', flat=True)
+
+        # Verifica as combinações de aeroportos que estão no banco de dados
         combinations = get_all_airports_combinations(all_airports)
+
+        # Verifica os vôos que estão no banco de dados x os que estão faltando
         missing_flights = find_missing_flights(all_airports, combinations)
 
         for flight in missing_flights:
