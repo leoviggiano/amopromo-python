@@ -13,3 +13,7 @@ class Airport(models.Model):
 
     def __str__(self):
         return self.iata
+
+    @classmethod
+    def find_airport(cls, iata):
+        return cls.objects.filter(iata=iata)
