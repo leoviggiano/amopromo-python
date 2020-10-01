@@ -11,19 +11,19 @@
 # Rotas:
 
 ## Airports
-  - /airports/distance - GET
+  - /airports/distance/ - **GET**
         - Rota definida para recuperar os aeroportos mais distante e mais perto
 
-- /airports/count - GET
+- /airports/count/ - **GET**
         - Rota definida para recuperar a quantidade de aeroporto por cidade
 
-- /airports/seeds - POST
+- /airports/seeds/ - **POST**
         - Rota definida para preencher o bacno de dados com os aeroportos disponibilizados
 
 ## Flights
-- /flights/duration - GET
+- /flights/duration/ - **GET**
         - Rota definida para recuperar a duração do vôo, modelo de aeronave, local e destino. É ordenada pela duração do vôo de forma decrescente
 
-- /flights/seeds - POST
+- /flights/seeds/ - **POST**
         - Rota definida para preencher o banco de dados com os dados de vôos disponibilizados
         - Nota: Só é possível depois de preencher a tabela Airports
