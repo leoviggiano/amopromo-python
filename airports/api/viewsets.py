@@ -35,7 +35,7 @@ class AirportViewSet(ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def count(self, request):
-        airports = Airport.objects.values('city').annotate(airports=Count('city')).order_by('-airports')[:1]
+        airports = Airport.objects.values('city').annotate(count=Count('city')).order_by('-count')[:1]
         return Response(airports, 200)
 
     @action(methods=['get'], detail=False)
@@ -51,8 +51,8 @@ class AirportViewSet(ModelViewSet):
 
             return_arr.append({
                 "from": iata,
-                "highest_duration": highest_iata,
-                "lowest_duration": lowest_iata,
+                "highest_iata": highest_iata,
+                "lowest_iata": lowest_iata,
             })
 
         return Response(return_arr, 200)
