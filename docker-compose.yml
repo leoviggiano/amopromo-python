@@ -1,0 +1,10 @@
+postgres:
+  image: postgres:12.4
+  container_name: amopromodjangodb
+  restart: always
+  ports:
+    - 5435:5432
+  environment:
+    - POSTGRES_DB=amopromodjangodb
+    - POSTGRES_PASSWORD=amopromo
+    - POSTGRES_USER=amopromodjangodb
