@@ -13,3 +13,7 @@ class Flights(models.Model):
     arrival_iata = models.CharField(max_length=3, null=False)
     average_speed = models.FloatField(null=False)
     flight_duration = models.IntegerField(null=False)
+
+    @classmethod
+    def find_flight(cls, arrival_iata, departure_iata):
+        return cls.objects.filter(arrival_iata=arrival_iata, departure_iata=departure_iata)

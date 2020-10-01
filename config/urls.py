@@ -22,7 +22,7 @@ from flights.api.viewsets import FlightViewSet
 
 router = routers.DefaultRouter()
 router.register(r'airports', AirportViewSet)
-router.register(r'fligths', FlightViewSet)
+router.register(r'flights', FlightViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

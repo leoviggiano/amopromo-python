@@ -6,7 +6,7 @@ from airports.api.serializers import AirportSerializer
 from airports.models import Airport
 from constants import API_KEY, API_PASS, API_USER, BASE_URL
 
-import json, requests
+import requests
 
 
 class AirportViewSet(ModelViewSet):
@@ -29,7 +29,6 @@ class AirportViewSet(ModelViewSet):
             new_airport.save()
 
         return Response({"message": "Seeds created"}, 201)
-        pass
 
     @action(methods=['get'], detail=False)
     def count(self, request):
